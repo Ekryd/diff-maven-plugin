@@ -1,0 +1,8 @@
+.idea
+*.iml
+target
+release.properties
+idea-plugin/out
+.settings
+.project
+.classpath
