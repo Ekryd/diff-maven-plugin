@@ -6,3 +6,4 @@ idea-plugin/out
 .settings
 .project
 .classpath
+.DS_Store
