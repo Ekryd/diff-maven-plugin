@@ -19,7 +19,7 @@ public class TestFilesToRemove {
         PluginParameters parameters = new PluginParametersBuilder()
                 .setFolders("src/test/resources/old", "src/test/resources/new")
                 .createPluginParameters();
-		
+
         FolderParser folderParser = new FolderParser();
         folderParser.setup(parameters);
         folderParser.diff();
@@ -33,7 +33,7 @@ public class TestFilesToRemove {
         PluginParameters parameters = new PluginParametersBuilder()
                 .setFolders("src/test/resources/new/", "src/test/resources/old/")
                 .createPluginParameters();
-		
+
         FolderParser folderParser = new FolderParser();
         folderParser.setup(parameters);
         folderParser.diff();
@@ -48,17 +48,18 @@ public class TestFilesToRemove {
                 .setFolders("src/test/resources/old", "src/test/resources/new")
                 .setLetterHandling(CASE_SENSITIVE)
                 .createPluginParameters();
-		
+
         FolderParser folderParser = new FolderParser();
         folderParser.setup(parameters);
         folderParser.diff();
 
-        assertThat(folderParser.getFilesToRemove(), 
-        		containsInAnyOrder(
-        				fileNameEndsWith("folder/A.txt"), 
-        				fileNameEndsWith("folder/C.txt"),
-        				fileNameEndsWith("letter/a.txt")
-        				));
+        assertThat(folderParser.getFilesToRemove(),
+                containsInAnyOrder(
+                        fileNameEndsWith("folder/A.txt"),
+                        fileNameEndsWith("folder/C.txt"),
+                        fileNameEndsWith("letter/a.txt")
+                )
+        );
     }
 
 }

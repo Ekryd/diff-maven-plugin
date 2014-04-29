@@ -21,7 +21,7 @@ public class FileWrapperTest {
         FileParameters fileParameters = new FileParameters(CASE_INSENSITIVE, new File("folder").getAbsolutePath());
         FileWrapper fileWrapper1 = new FileWrapper(fileParameters, new File("A.txt"));
         FileWrapper fileWrapper2 = new FileWrapper(fileParameters, new File("A.txt"));
-        
+
         assertThat(fileWrapper1, equalTo(fileWrapper2));
     }
 
@@ -30,7 +30,7 @@ public class FileWrapperTest {
         FileParameters fileParameters = new FileParameters(CASE_INSENSITIVE, new File("folder").getAbsolutePath());
         FileWrapper fileWrapper1 = new FileWrapper(fileParameters, new File("A.txt"));
         FileWrapper fileWrapper2 = new FileWrapper(fileParameters, new File("B.txt"));
-        
+
         assertThat(fileWrapper1, not(equalTo(fileWrapper2)));
     }
 
@@ -39,16 +39,16 @@ public class FileWrapperTest {
         FileParameters fileParameters = new FileParameters(CASE_INSENSITIVE, new File("folder").getAbsolutePath());
         FileWrapper fileWrapper1 = new FileWrapper(fileParameters, new File("A.txt"));
         FileWrapper fileWrapper2 = new FileWrapper(fileParameters, new File("a.txt"));
-        
+
         assertThat(fileWrapper1, equalTo(fileWrapper2));
     }
-    
+
     @Test
     public void twoIdenticalFilesShouldBeEqual2() {
         FileParameters fileParameters = new FileParameters(CASE_SENSITIVE, new File("folder").getAbsolutePath());
         FileWrapper fileWrapper1 = new FileWrapper(fileParameters, new File("A.txt"));
         FileWrapper fileWrapper2 = new FileWrapper(fileParameters, new File("A.txt"));
-        
+
         assertThat(fileWrapper1, equalTo(fileWrapper2));
     }
 
@@ -57,7 +57,7 @@ public class FileWrapperTest {
         FileParameters fileParameters = new FileParameters(CASE_SENSITIVE, new File("folder").getAbsolutePath());
         FileWrapper fileWrapper1 = new FileWrapper(fileParameters, new File("A.txt"));
         FileWrapper fileWrapper2 = new FileWrapper(fileParameters, new File("B.txt"));
-        
+
         assertThat(fileWrapper1, not(equalTo(fileWrapper2)));
     }
 
@@ -66,18 +66,18 @@ public class FileWrapperTest {
         FileParameters fileParameters = new FileParameters(CASE_SENSITIVE, new File("folder").getAbsolutePath());
         FileWrapper fileWrapper1 = new FileWrapper(fileParameters, new File("A.txt"));
         FileWrapper fileWrapper2 = new FileWrapper(fileParameters, new File("a.txt"));
-        
+
         assertThat(fileWrapper1, not(equalTo(fileWrapper2)));
     }
-    
+
     @Test
     public void differentBaseDirectoryShouldCompareFiles() {
         FileParameters fileParameters1 = new FileParameters(CASE_SENSITIVE, new File("old").getAbsolutePath());
         FileParameters fileParameters2 = new FileParameters(CASE_SENSITIVE, new File("new").getAbsolutePath());
         FileWrapper fileWrapper1 = new FileWrapper(fileParameters1, new File("old/A.txt"));
         FileWrapper fileWrapper2 = new FileWrapper(fileParameters2, new File("new/A.txt"));
-        
+
         assertThat(fileWrapper1, equalTo(fileWrapper2));
     }
-    
+
 }

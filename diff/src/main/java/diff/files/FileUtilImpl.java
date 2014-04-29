@@ -18,7 +18,7 @@ public class FileUtilImpl implements FileUtil {
     public Collection<File> getFiles(String folderName) {
         return FileUtils.listFiles(new File(folderName), ALL_FILES, ALL_FOLDERS);
     }
-    
+
     public String getAbsoluteFileName(String relativeFolderName) {
         return new File(relativeFolderName).getAbsolutePath();
     }

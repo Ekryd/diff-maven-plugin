@@ -13,7 +13,7 @@ public class FileSet {
     private final FileParameters fileParameters;
 
     private Collection<FileWrapper> fileWrappers = Collections.emptyList();
- 
+
     public FileSet(FileParameters fileParameters) {
         this.fileParameters = fileParameters;
     }
@@ -23,7 +23,7 @@ public class FileSet {
         for (File file : files) {
             fileWrappers.add(new FileWrapper(fileParameters, file));
         }
-        
+
         return this;
     }
 

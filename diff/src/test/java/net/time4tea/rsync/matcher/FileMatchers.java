@@ -11,21 +11,22 @@ import java.io.IOException;
 
 /**
  * Matchers for files
+ *
  * @author James Richardson
  * @see http://www.time4tea.net/wiki/display/MAIN/Testing+Files+with+Hamcrest
- */ 
+ */
 @SuppressWarnings("UnusedDeclaration")
 public class FileMatchers {
- 
+
     public static Matcher<File> isDirectory() {
         return new TypeSafeMatcher<File>() {
             File fileTested;
- 
+
             public boolean matchesSafely(File item) {
                 fileTested = item;
                 return item.isDirectory();
             }
- 
+
             public void describeTo(Description description) {
                 description.appendText(" that ");
                 description.appendValue(fileTested);
@@ -33,16 +34,16 @@ public class FileMatchers {
             }
         };
     }
- 
+
     public static Matcher<File> exists() {
         return new TypeSafeMatcher<File>() {
             File fileTested;
- 
+
             public boolean matchesSafely(File item) {
                 fileTested = item;
                 return item.exists();
             }
- 
+
             public void describeTo(Description description) {
                 description.appendText(" that file ");
                 description.appendValue(fileTested);
@@ -50,15 +51,16 @@ public class FileMatchers {
             }
         };
     }
- 
+
     public static Matcher<File> isFile() {
         return new TypeSafeMatcher<File>() {
             File fileTested;
+
             public boolean matchesSafely(File item) {
                 fileTested = item;
                 return item.isFile();
             }
- 
+
             public void describeTo(Description description) {
                 description.appendText(" that ");
                 description.appendValue(fileTested);
@@ -66,15 +68,16 @@ public class FileMatchers {
             }
         };
     }
- 
+
     public static Matcher<File> readable() {
         return new TypeSafeMatcher<File>() {
             File fileTested;
+
             public boolean matchesSafely(File item) {
                 fileTested = item;
                 return item.canRead();
             }
- 
+
             public void describeTo(Description description) {
                 description.appendText(" that file ");
                 description.appendValue(fileTested);
@@ -82,15 +85,16 @@ public class FileMatchers {
             }
         };
     }
- 
+
     public static Matcher<File> writable() {
         return new TypeSafeMatcher<File>() {
             File fileTested;
+
             public boolean matchesSafely(File item) {
                 fileTested = item;
                 return item.canWrite();
             }
- 
+
             public void describeTo(Description description) {
                 description.appendText(" that file ");
                 description.appendValue(fileTested);
@@ -98,21 +102,22 @@ public class FileMatchers {
             }
         };
     }
- 
+
     public static Matcher<File> sized(long size) {
         return sized(Matchers.equalTo(size));
     }
- 
+
     public static Matcher<File> sized(final Matcher<Long> size) {
         return new TypeSafeMatcher<File>() {
             File fileTested;
             long length;
+
             public boolean matchesSafely(File item) {
                 fileTested = item;
                 length = item.length();
                 return size.matches(length);
             }
- 
+
             public void describeTo(Description description) {
                 description.appendText(" that file ");
                 description.appendValue(fileTested);
@@ -122,26 +127,27 @@ public class FileMatchers {
             }
         };
     }
- 
+
     public static Matcher<File> named(final Matcher<String> name) {
         return new TypeSafeMatcher<File>() {
             File fileTested;
+
             public boolean matchesSafely(File item) {
                 fileTested = item;
                 return name.matches(item.getName());
             }
- 
+
             public void describeTo(Description description) {
                 description.appendText(" that file ");
                 description.appendValue(fileTested);
                 description.appendText(" is named");
                 description.appendDescriptionOf(name);
-                description.appendText(" not " );
+                description.appendText(" not ");
                 description.appendValue(fileTested.getName());
             }
         };
     }
- 
+
     public static Matcher<File> withCanonicalPath(final Matcher<String> path) {
         return new TypeSafeMatcher<File>() {
             public boolean matchesSafely(File item) {
@@ -151,7 +157,7 @@ public class FileMatchers {
                     return false;
                 }
             }
- 
+
             public void describeTo(Description description) {
                 description.appendText("with canonical path '");
                 description.appendDescriptionOf(path);
@@ -159,15 +165,16 @@ public class FileMatchers {
             }
         };
     }
- 
+
     public static Matcher<File> withAbsolutePath(final Matcher<String> path) {
         return new TypeSafeMatcher<File>() {
             File fileTested;
+
             public boolean matchesSafely(File item) {
                 fileTested = item;
                 return path.matches(item.getAbsolutePath());
             }
- 
+
             public void describeTo(Description description) {
                 description.appendText("with absolute path '");
                 description.appendDescriptionOf(path);

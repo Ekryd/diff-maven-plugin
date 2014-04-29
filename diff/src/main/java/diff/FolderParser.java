@@ -39,10 +39,10 @@ class FolderParser {
     private FileSet createFileSetFromFolder(String folder) {
         String absoluteFolderFileName = fileUtil.getAbsoluteFileName(folder);
         Collection<File> files = fileUtil.getFiles(folder);
-        
+
         FileSet fileSet = new FileSet(new FileParameters(letters, absoluteFolderFileName));
         fileSet.setFiles(files);
-        
+
         return fileSet;
     }
 

@@ -50,7 +50,7 @@ class FileWrapper {
 
     @Override
     public int hashCode() {
-        return file.hashCode();
+        return relativePathName.toLowerCase().hashCode();
     }
 
     public String getAbsolutePath() {

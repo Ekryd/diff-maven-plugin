@@ -13,12 +13,12 @@ public class PluginParametersBuilder {
         return this;
     }
 
-	public PluginParametersBuilder setLetterHandling(Letters letters) {
+    public PluginParametersBuilder setLetterHandling(Letters letters) {
         this.letters = letters;
-		return this;
-	}
+        return this;
+    }
 
-	public PluginParameters createPluginParameters() {
+    public PluginParameters createPluginParameters() {
         return new PluginParameters(oldFolder, newFolder, letters);
     }
 

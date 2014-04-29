@@ -7,7 +7,7 @@ package diff.parameters;
 public class FileParameters {
 
     private final Letters letters;
-   private final String scanBaseFolderPathName;
+    private final String scanBaseFolderPathName;
 
     public FileParameters(Letters letters, String scanBaseFolderPathName) {
         this.letters = letters;

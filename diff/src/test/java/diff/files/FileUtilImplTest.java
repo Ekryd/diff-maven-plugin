@@ -22,7 +22,7 @@ public class FileUtilImplTest {
         Collection<File> files = fileUtil.getFiles("src/test/resources");
 
         Matcher[] expectedFiles = {
-                withAbsolutePath(fileNameEndsWith("src/test/resources/old/folder/A.txt")), 
+                withAbsolutePath(fileNameEndsWith("src/test/resources/old/folder/A.txt")),
                 withAbsolutePath(fileNameEndsWith("src/test/resources/old/folder/B.txt")),
                 withAbsolutePath(fileNameEndsWith("src/test/resources/old/folder/C.txt")),
                 withAbsolutePath(fileNameEndsWith("src/test/resources/new/folder/D.txt")),
@@ -30,6 +30,6 @@ public class FileUtilImplTest {
                 withAbsolutePath(fileNameEndsWith("src/test/resources/new/LETTER/A.TXT")),
                 withAbsolutePath(fileNameEndsWith("src/test/resources/old/letter/a.txt")),
         };
-        assertThat(files, containsInAnyOrder(expectedFiles));                
+        assertThat(files, containsInAnyOrder(expectedFiles));
     }
 }
