@@ -5,18 +5,21 @@ public class PluginParametersBuilder {
 
     private String oldFolder;
     private String newFolder;
+    private Letters letters;
 
-    public PluginParametersBuilder setOldFolder(String oldFolder) {
+    public PluginParametersBuilder setFolders(String oldFolder, String newFolder) {
         this.oldFolder = oldFolder;
-        return this;
-    }
-
-    public PluginParametersBuilder setNewFolder(String newFolder) {
         this.newFolder = newFolder;
         return this;
     }
 
-    public PluginParameters createPluginParameters() {
-        return new PluginParameters(oldFolder, newFolder);
+	public PluginParametersBuilder setLetterHandling(Letters letters) {
+        this.letters = letters;
+		return this;
+	}
+
+	public PluginParameters createPluginParameters() {
+        return new PluginParameters(oldFolder, newFolder, letters);
     }
+
 }

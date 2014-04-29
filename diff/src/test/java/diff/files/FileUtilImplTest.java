@@ -6,9 +6,9 @@ import org.junit.Test;
 import java.io.File;
 import java.util.Collection;
 
+import static matcher.FileSlashMatcher.fileNameEndsWith;
 import static net.time4tea.rsync.matcher.FileMatchers.withAbsolutePath;
 import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.endsWith;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -22,11 +22,13 @@ public class FileUtilImplTest {
         Collection<File> files = fileUtil.getFiles("src/test/resources");
 
         Matcher[] expectedFiles = {
-                withAbsolutePath(endsWith("src/test/resources/old/folder/A.txt")), 
-                withAbsolutePath(endsWith("src/test/resources/old/folder/B.txt")),
-                withAbsolutePath(endsWith("src/test/resources/old/folder/C.txt")),
-                withAbsolutePath(endsWith("src/test/resources/new/folder/D.txt")),
-                withAbsolutePath(endsWith("src/test/resources/new/folder/B.txt"))
+                withAbsolutePath(fileNameEndsWith("src/test/resources/old/folder/A.txt")), 
+                withAbsolutePath(fileNameEndsWith("src/test/resources/old/folder/B.txt")),
+                withAbsolutePath(fileNameEndsWith("src/test/resources/old/folder/C.txt")),
+                withAbsolutePath(fileNameEndsWith("src/test/resources/new/folder/D.txt")),
+                withAbsolutePath(fileNameEndsWith("src/test/resources/new/folder/B.txt")),
+                withAbsolutePath(fileNameEndsWith("src/test/resources/new/LETTER/A.TXT")),
+                withAbsolutePath(fileNameEndsWith("src/test/resources/old/letter/a.txt")),
         };
         assertThat(files, containsInAnyOrder(expectedFiles));                
     }
