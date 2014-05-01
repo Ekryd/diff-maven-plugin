@@ -1,4 +1,4 @@
-package diff.fileset;
+package diff.files;
 
 import diff.exception.FailureException;
 import diff.parameters.Letters;
@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class FolderFilter extends AbstractFileFilter {
 
-    public static final String REGEX_MATCHING_TRIMMING_ANY_SLASHES = "^[/\\\\]*(.*?)[/\\\\]*$";
+    private static final String REGEX_MATCHING_TRIMMING_ANY_SLASHES = "^[/\\\\]*(.*?)[/\\\\]*$";
     private final List<String> excludeAbsoluteFolders = new ArrayList<String>();
     private final Letters letters;
 
@@ -52,6 +52,7 @@ public class FolderFilter extends AbstractFileFilter {
         return true;
     }
 
+    @SuppressWarnings("RedundantIfStatement")
     private boolean isExcluded(String absolutePath, String excludeAbsoluteFolder) {
         if (letters.equals(Letters.CASE_INSENSITIVE) && excludeAbsoluteFolder.equalsIgnoreCase(absolutePath)) {
             return true;

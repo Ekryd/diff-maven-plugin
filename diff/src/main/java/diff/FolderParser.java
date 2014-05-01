@@ -3,8 +3,7 @@ package diff;
 import diff.files.FileUtil;
 import diff.files.FileUtilImpl;
 import diff.fileset.FileSet;
-import diff.fileset.FolderFilter;
-import diff.parameters.FileParameters;
+import diff.files.FolderFilter;
 import diff.parameters.Letters;
 import diff.parameters.PluginParameters;
 
@@ -43,8 +42,7 @@ class FolderParser {
         String absoluteBaseFolder = fileUtil.getAbsoluteFileName(relativeBaseFolder);
                
         FolderFilter folderFilter = new FolderFilter(parameters, absoluteBaseFolder);
-        FileParameters fileParameters = new FileParameters(letters, absoluteBaseFolder);
-        FileSet fileSet = new FileSet(fileParameters);
+        FileSet fileSet = new FileSet(letters, absoluteBaseFolder);
         
         Collection<File> files = fileUtil.getFiles(relativeBaseFolder, folderFilter);
         fileSet.setFiles(files);

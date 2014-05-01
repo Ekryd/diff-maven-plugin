@@ -1,6 +1,5 @@
 package diff.fileset;
 
-import diff.parameters.FileParameters;
 import org.junit.Test;
 
 import java.io.File;
@@ -18,7 +17,7 @@ import static org.junit.Assert.assertThat;
 public class TestFileSet {
     @Test
     public void newFileSetShouldNotHaveAnyFiles() {
-        FileSet fileSet = new FileSet(new FileParameters(CASE_INSENSITIVE, new File("folder").getAbsolutePath()));
+        FileSet fileSet = new FileSet(CASE_INSENSITIVE, new File("folder").getAbsolutePath());
         assertThat(fileSet.size(), is(0));
     }
 
@@ -26,7 +25,7 @@ public class TestFileSet {
     public void filesShouldBeConvertedToFileSet() {
         Collection<File> files = createMockFileCollection(42);
 
-        FileSet fileSet = new FileSet(new FileParameters(CASE_INSENSITIVE, new File("folder").getAbsolutePath()));
+        FileSet fileSet = new FileSet(CASE_INSENSITIVE, new File("folder").getAbsolutePath());
         fileSet.setFiles(files);
         assertThat(fileSet.size(), is(42));
     }
@@ -35,7 +34,7 @@ public class TestFileSet {
     public void getAbsoluteFileNamesShouldReturnAbsoluteFileNames() {
         Collection<File> files = createMockFileCollection(3);
 
-        FileSet fileSet = new FileSet(new FileParameters(CASE_INSENSITIVE, new File("folder").getAbsolutePath()));
+        FileSet fileSet = new FileSet(CASE_INSENSITIVE, new File("folder").getAbsolutePath());
         fileSet.setFiles(files);
 
         assertThat(fileSet.getAbsoluteFilePaths(), containsInAnyOrder(
@@ -50,9 +49,9 @@ public class TestFileSet {
         Collection<File> oldFiles = Arrays.asList(new File("A.txt"), new File("B.txt"), new File("C.txt"));
         Collection<File> newFiles = Arrays.asList(new File("B.txt"), new File("C.txt"), new File("D.txt"));
 
-        FileSet oldFileSet = new FileSet(new FileParameters(CASE_INSENSITIVE, new File("folder").getAbsolutePath()));
+        FileSet oldFileSet = new FileSet(CASE_INSENSITIVE, new File("folder").getAbsolutePath());
         oldFileSet.setFiles(oldFiles);
-        FileSet newFileSet = new FileSet(new FileParameters(CASE_INSENSITIVE, new File("folder").getAbsolutePath()));
+        FileSet newFileSet = new FileSet(CASE_INSENSITIVE, new File("folder").getAbsolutePath());
         newFileSet.setFiles(newFiles);
 
         FileSet filesLeft = oldFileSet.removeAll(newFileSet);
@@ -67,9 +66,9 @@ public class TestFileSet {
         Collection<File> oldFiles = Arrays.asList(new File("A.txt"), new File("B.txt"), new File("C.txt"));
         Collection<File> newFiles = Arrays.asList(new File("b.txt"), new File("c.txt"), new File("d.txt"));
 
-        FileSet oldFileSet = new FileSet(new FileParameters(CASE_INSENSITIVE, new File("folder").getAbsolutePath()));
+        FileSet oldFileSet = new FileSet(CASE_INSENSITIVE, new File("folder").getAbsolutePath());
         oldFileSet.setFiles(oldFiles);
-        FileSet newFileSet = new FileSet(new FileParameters(CASE_INSENSITIVE, new File("folder").getAbsolutePath()));
+        FileSet newFileSet = new FileSet(CASE_INSENSITIVE, new File("folder").getAbsolutePath());
         newFileSet.setFiles(newFiles);
 
         FileSet filesLeft = oldFileSet.removeAll(newFileSet);
@@ -84,9 +83,9 @@ public class TestFileSet {
         Collection<File> oldFiles = Arrays.asList(new File("A.txt"), new File("B.txt"), new File("C.txt"));
         Collection<File> newFiles = Arrays.asList(new File("b.txt"), new File("c.txt"), new File("d.txt"));
 
-        FileSet oldFileSet = new FileSet(new FileParameters(CASE_SENSITIVE, new File("folder").getAbsolutePath()));
+        FileSet oldFileSet = new FileSet(CASE_SENSITIVE, new File("folder").getAbsolutePath());
         oldFileSet.setFiles(oldFiles);
-        FileSet newFileSet = new FileSet(new FileParameters(CASE_SENSITIVE, new File("folder").getAbsolutePath()));
+        FileSet newFileSet = new FileSet(CASE_SENSITIVE, new File("folder").getAbsolutePath());
         newFileSet.setFiles(newFiles);
 
         FileSet filesLeft = oldFileSet.removeAll(newFileSet);

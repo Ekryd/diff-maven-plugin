@@ -1,6 +1,6 @@
 package diff.fileset;
 
-import diff.parameters.FileParameters;
+import diff.parameters.Letters;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -10,18 +10,17 @@ import java.util.List;
 
 public class FileSet {
 
-    private final FileParameters fileParameters;
-
+    private final FileWrapperBehaviour fileWrapperBehaviour;
     private Collection<FileWrapper> fileWrappers = Collections.emptyList();
 
-    public FileSet(FileParameters fileParameters) {
-        this.fileParameters = fileParameters;
+    public FileSet(Letters letters, String absoluteBaseFolder) {
+        this.fileWrapperBehaviour = new FileWrapperBehaviour(letters, absoluteBaseFolder);
     }
 
     public FileSet setFiles(Collection<File> files) {
         fileWrappers = new ArrayList<FileWrapper>();
         for (File file : files) {
-            fileWrappers.add(new FileWrapper(fileParameters, file));
+            fileWrappers.add(new FileWrapper(fileWrapperBehaviour, file));
         }
 
         return this;
@@ -43,12 +42,14 @@ public class FileSet {
 
     public FileSet removeAll(FileSet fileSet) {
         Collection<FileWrapper> filesLeft = new ArrayList<FileWrapper>(fileWrappers);
+        fileWrapperBehaviour.setFileNameEqualizer();
 
         filesLeft.removeAll(fileSet.fileWrappers);
 
-        FileSet returnValue = new FileSet(fileParameters);
+        FileSet returnValue = new FileSet(fileWrapperBehaviour.getLetters(), fileWrapperBehaviour.getScanBaseFolderPathName());
         returnValue.fileWrappers = filesLeft;
 
+        fileWrapperBehaviour.setDefaultEqualizer();
         return returnValue;
     }
 

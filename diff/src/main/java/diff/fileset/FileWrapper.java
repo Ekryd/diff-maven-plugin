@@ -1,24 +1,20 @@
 package diff.fileset;
 
-import diff.parameters.FileParameters;
-
 import java.io.File;
-
-import static diff.parameters.Letters.CASE_SENSITIVE;
 
 /**
  * @author bjorn
  * @since 2014-04-29
  */
 class FileWrapper {
-    private final FileParameters fileParameters;
+    private final FileWrapperBehaviour fileWrapperBehaviour;
     private final File file;
     private final String relativePathName;
 
-    public FileWrapper(FileParameters fileParameters, File file) {
+    public FileWrapper(FileWrapperBehaviour fileWrapperBehaviour, File file) {
         this.file = file;
-        this.fileParameters = fileParameters;
-        this.relativePathName = findRelativePathName(fileParameters.getScanBaseFolderPathName(), file);
+        this.fileWrapperBehaviour = fileWrapperBehaviour;
+        this.relativePathName = findRelativePathName(fileWrapperBehaviour.getScanBaseFolderPathName(), file);
     }
 
     private String findRelativePathName(String scanBaseFolderPathName, File file) {
@@ -31,21 +27,8 @@ class FileWrapper {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        FileWrapper that = (FileWrapper) o;
-
-        if (fileParameters.getLetters() == CASE_SENSITIVE) {
-            return relativePathName.equals(that.relativePathName);
-        }
-
-        return relativePathName.equalsIgnoreCase(that.relativePathName);
+    public boolean equals(Object other) {
+        return fileWrapperBehaviour.getEqualizer().equalTo(this, (FileWrapper) other);
     }
 
     @Override

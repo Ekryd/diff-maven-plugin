@@ -1,4 +1,4 @@
-package diff.fileset;
+package diff.files;
 
 import diff.parameters.PluginParameters;
 import diff.parameters.PluginParametersBuilder;

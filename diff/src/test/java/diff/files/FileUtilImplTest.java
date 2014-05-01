@@ -1,6 +1,5 @@
 package diff.files;
 
-import diff.fileset.FolderFilter;
 import diff.parameters.Letters;
 import diff.parameters.PluginParameters;
 import diff.parameters.PluginParametersBuilder;
