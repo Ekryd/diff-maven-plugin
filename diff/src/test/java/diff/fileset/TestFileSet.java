@@ -11,14 +11,13 @@ import java.util.Collection;
 import static diff.parameters.Letters.CASE_INSENSITIVE;
 import static diff.parameters.Letters.CASE_SENSITIVE;
 import static matcher.FileSlashMatcher.fileNameEndsWith;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 @SuppressWarnings("unchecked")
 public class TestFileSet {
     @Test
-    public void newFileSetShouldNothaveAnyFiles() {
+    public void newFileSetShouldNotHaveAnyFiles() {
         FileSet fileSet = new FileSet(new FileParameters(CASE_INSENSITIVE, new File("folder").getAbsolutePath()));
         assertThat(fileSet.size(), is(0));
     }
@@ -47,7 +46,7 @@ public class TestFileSet {
     }
 
     @Test
-    public void removeAllOneFileSetFromAnoherShouldReturnNewCollection() {
+    public void removeAllOneFileSetFromAnotherShouldReturnNewCollection() {
         Collection<File> oldFiles = Arrays.asList(new File("A.txt"), new File("B.txt"), new File("C.txt"));
         Collection<File> newFiles = Arrays.asList(new File("B.txt"), new File("C.txt"), new File("D.txt"));
 
@@ -58,7 +57,7 @@ public class TestFileSet {
 
         FileSet filesLeft = oldFileSet.removeAll(newFileSet);
 
-        assertThat(filesLeft.getAbsoluteFilePaths(), containsInAnyOrder(
+        assertThat(filesLeft.getAbsoluteFilePaths(), contains(
                 fileNameEndsWith("diff-plugin/diff/A.txt")
         ));
     }
@@ -75,7 +74,7 @@ public class TestFileSet {
 
         FileSet filesLeft = oldFileSet.removeAll(newFileSet);
 
-        assertThat(filesLeft.getAbsoluteFilePaths(), containsInAnyOrder(
+        assertThat(filesLeft.getAbsoluteFilePaths(), contains(
                 fileNameEndsWith("diff-plugin/diff/A.txt")
         ));
     }

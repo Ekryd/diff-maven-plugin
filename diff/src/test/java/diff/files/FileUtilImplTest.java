@@ -23,7 +23,6 @@ import static org.junit.Assert.assertThat;
 public class FileUtilImplTest {
     @Test
     public void getFilesShouldReturnAllFilesRecursively() throws Exception {
-        PluginParameters parameters = new PluginParametersBuilder().createPluginParameters();
         FileUtilImpl fileUtil = new FileUtilImpl();
         Collection<File> files = fileUtil.getFiles("src/test/resources/new/recursive", CanReadFileFilter.CAN_READ);
 

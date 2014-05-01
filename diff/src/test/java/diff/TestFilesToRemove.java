@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import static diff.parameters.Letters.CASE_SENSITIVE;
 import static matcher.FileSlashMatcher.fileNameEndsWith;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 import static org.junit.Assert.assertThat;
 
@@ -42,12 +43,12 @@ public class TestFilesToRemove {
         folderParser.setup(parameters);
         folderParser.diff();
 
-        assertThat(folderParser.getFilesToRemove(), containsInAnyOrder(
+        assertThat(folderParser.getFilesToRemove(), contains(
                 fileNameEndsWith("folder/D.txt")));
     }
 
     @Test
-    public void caseSensitivityShouldIgnoreLettersInFoldersAndFilenames() {
+    public void caseSensitivityShouldIgnoreLettersInFoldersAndFileNames() {
         // The file A.txt is not present in new folder, so it should be part of files to remove
         // folder is not ignored by "FOLDER"
         PluginParameters parameters = new PluginParametersBuilder()

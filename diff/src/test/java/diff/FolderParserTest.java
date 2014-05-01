@@ -14,7 +14,7 @@ import java.io.File;
 import java.util.Arrays;
 
 import static matcher.FileSlashMatcher.fileNameEndsWith;
-import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.endsWith;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
@@ -36,7 +36,7 @@ public class FolderParserTest {
         helper.setField("newFiles", new FileSet(new FileParameters(Letters.CASE_SENSITIVE, new File("folder").getAbsolutePath())).setFiles(Arrays.asList(
                 new File("B.txt"), new File("C.txt"))));
 
-        assertThat(folderParser.getFilesToRemove(), containsInAnyOrder(endsWith("A.txt")));
+        assertThat(folderParser.getFilesToRemove(), contains(endsWith("A.txt")));
     }
 
     @Test
@@ -66,6 +66,6 @@ public class FolderParserTest {
 
         folderParser.diff();
 
-        assertThat(folderParser.getFilesToRemove(), containsInAnyOrder(fileNameEndsWith("folder/A.txt")));
+        assertThat(folderParser.getFilesToRemove(), contains(fileNameEndsWith("folder/A.txt")));
     }
 }

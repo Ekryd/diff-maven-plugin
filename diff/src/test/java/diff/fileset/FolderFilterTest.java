@@ -11,6 +11,7 @@ import static matcher.FileSlashMatcher.fileNameEndsWith;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertThat;
 
+@SuppressWarnings("unchecked")
 public class FolderFilterTest {
     @Test
     public void endingSlashesShouldBeRemovedOnIgnoreFolders() throws NoSuchFieldException, IllegalAccessException {
