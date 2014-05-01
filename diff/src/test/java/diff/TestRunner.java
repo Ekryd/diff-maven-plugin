@@ -12,6 +12,7 @@ public class TestRunner {
         // The file A.txt is not present in new folder, so it should be part of files to remove
         PluginParameters parameters = new PluginParametersBuilder()
                 .setFolders("C:\\Bankdata\\Versions\\3.3.10\\PS31_BOOT\\APPS", "C:\\Bankdata\\Versions\\3.4.50\\PS31_BOOT\\APPS")
+                .setExcludeRelativeFolders("SB", "ATM")
                 .createPluginParameters();
 
         FolderParser folderParser = new FolderParser();

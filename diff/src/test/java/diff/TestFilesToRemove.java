@@ -18,13 +18,16 @@ public class TestFilesToRemove {
         // The file A.txt is not present in new folder, so it should be part of files to remove
         PluginParameters parameters = new PluginParametersBuilder()
                 .setFolders("src/test/resources/old", "src/test/resources/new")
+                .setExcludeRelativeFolders("IGNORE", "IGNORE2")
                 .createPluginParameters();
 
         FolderParser folderParser = new FolderParser();
         folderParser.setup(parameters);
         folderParser.diff();
 
-        assertThat(folderParser.getFilesToRemove(), containsInAnyOrder(fileNameEndsWith("folder/A.txt"), fileNameEndsWith("folder/C.txt")));
+        assertThat(folderParser.getFilesToRemove(), containsInAnyOrder(
+                fileNameEndsWith("folder/A.txt"),
+                fileNameEndsWith("folder/C.txt")));
     }
 
     @Test
@@ -32,21 +35,25 @@ public class TestFilesToRemove {
         // The file A.txt is not present in new folder, so it should be part of files to remove
         PluginParameters parameters = new PluginParametersBuilder()
                 .setFolders("src/test/resources/new/", "src/test/resources/old/")
+                .setExcludeRelativeFolders("ignore", "ignore2", "recursive")
                 .createPluginParameters();
 
         FolderParser folderParser = new FolderParser();
         folderParser.setup(parameters);
         folderParser.diff();
 
-        assertThat(folderParser.getFilesToRemove(), containsInAnyOrder(fileNameEndsWith("folder/D.txt")));
+        assertThat(folderParser.getFilesToRemove(), containsInAnyOrder(
+                fileNameEndsWith("folder/D.txt")));
     }
 
     @Test
     public void caseSensitivityShouldIgnoreLettersInFoldersAndFilenames() {
         // The file A.txt is not present in new folder, so it should be part of files to remove
+        // folder is not ignored by "FOLDER"
         PluginParameters parameters = new PluginParametersBuilder()
                 .setFolders("src/test/resources/old", "src/test/resources/new")
                 .setLetterHandling(CASE_SENSITIVE)
+                .setExcludeRelativeFolders("ignore", "ignore2", "FOLDER")
                 .createPluginParameters();
 
         FolderParser folderParser = new FolderParser();

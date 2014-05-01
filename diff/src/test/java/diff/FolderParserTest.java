@@ -6,6 +6,7 @@ import diff.parameters.FileParameters;
 import diff.parameters.Letters;
 import diff.parameters.PluginParameters;
 import diff.parameters.PluginParametersBuilder;
+import org.apache.commons.io.filefilter.IOFileFilter;
 import org.junit.Test;
 import refutils.ReflectionHelper;
 
@@ -16,6 +17,8 @@ import static matcher.FileSlashMatcher.fileNameEndsWith;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.endsWith;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -39,11 +42,11 @@ public class FolderParserTest {
     @Test
     public void filesShouldBeLoadedFromFileUtil() throws Exception {
         FileUtil fileUtil = mock(FileUtil.class);
-        when(fileUtil.getFiles("src/test/resources/old"))
+        when(fileUtil.getFiles(eq("src/test/resources/old"), any(IOFileFilter.class)))
                 .thenReturn(Arrays.asList(
                         new File("src/test/resources/old/folder/A.txt"),
                         new File("src/test/resources/old/folder/B.txt")));
-        when(fileUtil.getFiles("src/test/resources/new"))
+        when(fileUtil.getFiles(eq("src/test/resources/new"), any(IOFileFilter.class)))
                 .thenReturn(Arrays.asList(
                         new File("src/test/resources/new/folder/B.txt"),
                         new File("src/test/resources/new/folder/C.txt")));

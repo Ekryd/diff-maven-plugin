@@ -13,10 +13,9 @@ import java.util.Collection;
  */
 public class FileUtilImpl implements FileUtil {
     private static final IOFileFilter ALL_FILES = CanReadFileFilter.CAN_READ;
-    private static final IOFileFilter ALL_FOLDERS = CanReadFileFilter.CAN_READ;
 
-    public Collection<File> getFiles(String folderName) {
-        return FileUtils.listFiles(new File(folderName), ALL_FILES, ALL_FOLDERS);
+    public Collection<File> getFiles(String folderName, IOFileFilter folderFilter) {
+        return FileUtils.listFiles(new File(folderName), ALL_FILES, folderFilter);
     }
 
     public String getAbsoluteFileName(String relativeFolderName) {

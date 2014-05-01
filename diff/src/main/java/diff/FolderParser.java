@@ -3,6 +3,7 @@ package diff;
 import diff.files.FileUtil;
 import diff.files.FileUtilImpl;
 import diff.fileset.FileSet;
+import diff.fileset.FolderFilter;
 import diff.parameters.FileParameters;
 import diff.parameters.Letters;
 import diff.parameters.PluginParameters;
@@ -16,6 +17,7 @@ import java.util.List;
  * @since 2014-04-25
  */
 class FolderParser {
+    private PluginParameters parameters;
     private FileUtil fileUtil;
     private String newFolder;
     private String oldFolder;
@@ -25,10 +27,11 @@ class FolderParser {
     private Letters letters;
 
     public void setup(PluginParameters parameters) {
-        newFolder = parameters.getNewFolder();
-        oldFolder = parameters.getOldFolder();
-        letters = parameters.getLetters();
-        fileUtil = new FileUtilImpl();
+        this.parameters = parameters;
+        this.newFolder = parameters.getNewFolder();
+        this.oldFolder = parameters.getOldFolder();
+        this.letters = parameters.getLetters();
+        this.fileUtil = new FileUtilImpl();
     }
 
     public void diff() {
@@ -36,11 +39,14 @@ class FolderParser {
         newFiles = createFileSetFromFolder(newFolder);
     }
 
-    private FileSet createFileSetFromFolder(String folder) {
-        String absoluteFolderFileName = fileUtil.getAbsoluteFileName(folder);
-        Collection<File> files = fileUtil.getFiles(folder);
-
-        FileSet fileSet = new FileSet(new FileParameters(letters, absoluteFolderFileName));
+    private FileSet createFileSetFromFolder(String relativeBaseFolder) {
+        String absoluteBaseFolder = fileUtil.getAbsoluteFileName(relativeBaseFolder);
+               
+        FolderFilter folderFilter = new FolderFilter(parameters, absoluteBaseFolder);
+        FileParameters fileParameters = new FileParameters(letters, absoluteBaseFolder);
+        FileSet fileSet = new FileSet(fileParameters);
+        
+        Collection<File> files = fileUtil.getFiles(relativeBaseFolder, folderFilter);
         fileSet.setFiles(files);
 
         return fileSet;
