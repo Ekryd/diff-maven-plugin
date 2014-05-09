@@ -4,7 +4,6 @@ import diff.parameters.PluginParameters;
 import diff.parameters.PluginParametersBuilder;
 import org.junit.Test;
 
-import static diff.parameters.Letters.CASE_SENSITIVE;
 import static matcher.FileSlashMatcher.fileNameEndsWith;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
@@ -53,7 +52,7 @@ public class TestFilesToRemove {
         // folder is not ignored by "FOLDER"
         PluginParameters parameters = new PluginParametersBuilder()
                 .setFolders("src/test/resources/old", "src/test/resources/new")
-                .setLetterHandling(CASE_SENSITIVE)
+                .setLetterHandling("CASE_SENSITIVE")
                 .setExcludeRelativeFolders("ignore", "ignore2", "FOLDER")
                 .createPluginParameters();
 

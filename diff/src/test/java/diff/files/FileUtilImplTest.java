@@ -1,6 +1,5 @@
 package diff.files;
 
-import diff.parameters.Letters;
 import diff.parameters.PluginParameters;
 import diff.parameters.PluginParametersBuilder;
 import org.apache.commons.io.filefilter.CanReadFileFilter;
@@ -50,7 +49,7 @@ public class FileUtilImplTest {
     public void ignoredFoldersCaseSensitiveShouldShow() throws Exception {
         PluginParameters parameters = new PluginParametersBuilder()
                 .setExcludeRelativeFolders("new/ignore2", "old/IGNORE")
-                .setLetterHandling(Letters.CASE_SENSITIVE)
+                .setLetterHandling("CASE_SENSITIVE")
                 .createPluginParameters();
         FileUtilImpl fileUtil = new FileUtilImpl();
 

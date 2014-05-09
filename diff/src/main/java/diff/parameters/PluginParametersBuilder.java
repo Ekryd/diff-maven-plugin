@@ -18,8 +18,8 @@ public class PluginParametersBuilder {
         return this;
     }
 
-    public PluginParametersBuilder setLetterHandling(Letters letters) {
-        this.letters = letters;
+    public PluginParametersBuilder setLetterHandling(String letters) {
+        this.letters = Letters.fromString(letters);
         return this;
     }
 
