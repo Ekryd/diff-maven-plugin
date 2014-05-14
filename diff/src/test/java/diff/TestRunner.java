@@ -5,6 +5,8 @@ import diff.parameters.PluginParametersBuilder;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.List;
+
 public class TestRunner {
     @Ignore
     @Test
@@ -15,11 +17,14 @@ public class TestRunner {
                 .setExcludeRelativeFolders("SB", "ATM")
                 .createPluginParameters();
 
-        FolderParser folderParser = new FolderParser();
+        FolderParser folderParser = new FolderParser(null);
         folderParser.setup(parameters);
         folderParser.diff();
 
-        System.out.println(folderParser.getFilesToRemove());
+        List<String> filesToRemove = folderParser.getFilesToRemove();
+        for (String fileToRemove : filesToRemove) {
+            System.out.println(fileToRemove);
+        }
     }
 
 }

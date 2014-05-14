@@ -36,4 +36,8 @@ class FileWrapperBehaviour {
     public void setDefaultEqualizer() {
         equalizer = new EqualizerGeneratesException();
     }
+
+    public void setFileSizeEqualizer() {
+        equalizer = new EqualizerUsesFileSize();
+    }
 }

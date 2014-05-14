@@ -54,10 +54,10 @@ public class FolderFilter extends AbstractFileFilter {
 
     @SuppressWarnings("RedundantIfStatement")
     private boolean isExcluded(String absolutePath, String excludeAbsoluteFolder) {
-        if (letters.equals(Letters.CASE_INSENSITIVE) && excludeAbsoluteFolder.equalsIgnoreCase(absolutePath)) {
+        if (letters == Letters.CASE_INSENSITIVE && excludeAbsoluteFolder.equalsIgnoreCase(absolutePath)) {
             return true;
         }
-        if (letters.equals(Letters.CASE_SENSITIVE) && excludeAbsoluteFolder.equals(absolutePath)) {
+        if (letters == Letters.CASE_SENSITIVE && excludeAbsoluteFolder.equals(absolutePath)) {
             return true;
         }
         return false;

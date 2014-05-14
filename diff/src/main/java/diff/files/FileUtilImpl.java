@@ -15,7 +15,11 @@ public class FileUtilImpl implements FileUtil {
     private static final IOFileFilter ALL_FILES = CanReadFileFilter.CAN_READ;
 
     public Collection<File> getFiles(String folderName, IOFileFilter folderFilter) {
+        try {
         return FileUtils.listFiles(new File(folderName), ALL_FILES, folderFilter);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Could not list files in '" + folderName + "'", e);
+        }
     }
 
     public String getAbsoluteFileName(String relativeFolderName) {

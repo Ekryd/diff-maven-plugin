@@ -1,5 +1,8 @@
 package diff;
 
+import diff.exception.ExceptionHandler;
+import diff.exception.FailureException;
+import diff.logger.MavenLogger;
 import diff.parameters.PluginParameters;
 import diff.parameters.PluginParametersBuilder;
 import org.apache.maven.plugin.AbstractMojo;
@@ -8,7 +11,7 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
-import java.util.List;
+import java.io.File;
 
 /**
  * Mojo (Maven plugin) that finds if any files should be removed during patch.
@@ -36,6 +39,10 @@ public class FilesToRemoveMojo extends AbstractMojo {
     @Parameter(property = "diff.excludeRelativeFolders")
     private String[] excludeRelativeFolders;
 
+    /** Store the result from fileToRemove in this file (if specified) */
+    @Parameter(property = "diff.filesToRemoveOutputFile")
+    private File filesToRemoveOutputFile;
+
     private FolderParser folderParser;
 
     /**
@@ -51,25 +58,31 @@ public class FilesToRemoveMojo extends AbstractMojo {
     }
 
     void setup() throws MojoFailureException {
-        PluginParameters pluginParameters = new PluginParametersBuilder()
-                .setFolders(oldFolder, newFolder)
-                .setLetterHandling(letters)
-                .setExcludeRelativeFolders(excludeRelativeFolders)
-                .createPluginParameters();
+        try {
+            
+            PluginParameters pluginParameters = new PluginParametersBuilder()
+                    .setFolders(oldFolder, newFolder)
+                    .setLetterHandling(letters)
+                    .setExcludeRelativeFolders(excludeRelativeFolders)
+                    .setFilesToRemoveOutputFile(filesToRemoveOutputFile)
+                    .createPluginParameters();
 
-        folderParser = new FolderParser();
-        folderParser.setup(pluginParameters);
+            folderParser = new FolderParser(new MavenLogger(getLog()));
+            folderParser.setup(pluginParameters);
+            
+        } catch (FailureException e) {
+            new ExceptionHandler(e).throwMojoFailureException();
+        }
     }
 
     void showFilesToRemove() throws MojoFailureException {
-        folderParser.diff();
+        try {
 
-        List<String> filesToRemove = folderParser.getFilesToRemove();
-        if (filesToRemove.size() != 0) {
-            getLog().info("The following files should be removed: ");
-            for (String fileToRemove : filesToRemove) {
-                getLog().info(fileToRemove);
-            }
+        folderParser.diff();
+        folderParser.outputFilesToRemove();
+
+        } catch (FailureException e) {
+            new ExceptionHandler(e).throwMojoFailureException();
         }
     }
 

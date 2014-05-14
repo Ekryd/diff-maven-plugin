@@ -2,8 +2,9 @@ package diff;
 
 import diff.files.FileUtil;
 import diff.files.FileUtilImpl;
-import diff.fileset.FileSet;
 import diff.files.FolderFilter;
+import diff.fileset.FileSet;
+import diff.logger.SortPomLogger;
 import diff.parameters.Letters;
 import diff.parameters.PluginParameters;
 
@@ -16,6 +17,7 @@ import java.util.List;
  * @since 2014-04-25
  */
 class FolderParser {
+    private final SortPomLogger logger;
     private PluginParameters parameters;
     private FileUtil fileUtil;
     private String newFolder;
@@ -24,6 +26,10 @@ class FolderParser {
     private FileSet oldFiles;
     private FileSet newFiles;
     private Letters letters;
+
+    public FolderParser(SortPomLogger logger) {
+        this.logger = logger;
+    }
 
     public void setup(PluginParameters parameters) {
         this.parameters = parameters;
@@ -50,9 +56,25 @@ class FolderParser {
         return fileSet;
     }
 
-    public List<String> getFilesToRemove() {
+    public void outputFilesToRemove() {
+        List<String> filesToRemove = getFilesToRemove();
+        if (filesToRemove.size() != 0) {
+            logger.info("The following files should be removed: ");
+            for (String fileToRemove : filesToRemove) {
+                logger.info(fileToRemove);
+            }
+        }
+    }
+
+    List<String> getFilesToRemove() {
         FileSet filesToRemove = oldFiles.removeAll(newFiles);
 
         return filesToRemove.getRelativeFileNames();
+    }
+
+    public Iterable<? extends String> getFilesChanged() {
+        FileSet filesChanged = oldFiles.retainChangedFiles(newFiles);
+
+        return filesChanged.getRelativeFileNames();
     }
 }

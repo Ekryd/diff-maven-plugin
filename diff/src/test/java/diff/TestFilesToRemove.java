@@ -21,7 +21,7 @@ public class TestFilesToRemove {
                 .setExcludeRelativeFolders("IGNORE", "IGNORE2")
                 .createPluginParameters();
 
-        FolderParser folderParser = new FolderParser();
+        FolderParser folderParser = new FolderParser(null);
         folderParser.setup(parameters);
         folderParser.diff();
 
@@ -38,7 +38,7 @@ public class TestFilesToRemove {
                 .setExcludeRelativeFolders("ignore", "ignore2", "recursive")
                 .createPluginParameters();
 
-        FolderParser folderParser = new FolderParser();
+        FolderParser folderParser = new FolderParser(null);
         folderParser.setup(parameters);
         folderParser.diff();
 
@@ -56,7 +56,7 @@ public class TestFilesToRemove {
                 .setExcludeRelativeFolders("ignore", "ignore2", "FOLDER")
                 .createPluginParameters();
 
-        FolderParser folderParser = new FolderParser();
+        FolderParser folderParser = new FolderParser(null);
         folderParser.setup(parameters);
         folderParser.diff();
 

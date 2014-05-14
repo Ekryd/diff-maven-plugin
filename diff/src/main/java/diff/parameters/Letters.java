@@ -6,14 +6,13 @@ package diff.parameters;
  */
 public enum Letters {
     CASE_SENSITIVE, CASE_INSENSITIVE;
-    
-    public static Letters fromString(String letters) {
-        Letters[] values = values();
-        for (Letters value : values) {
-            if (value.name().equalsIgnoreCase(letters)) {
-                return value;
+
+    static Letters fromString(String letterString) {
+        for (Letters letter : values()) {
+            if (letter.name().equalsIgnoreCase(letterString)) {
+                return letter;
             }
         }
-        throw new RuntimeException("Letter handling must be either CASE_SENSITIVE or CASE_INSENSITIVE");
+        throw new RuntimeException("Case sensitivity must be either CASE_SENSITIVE or CASE_INSENSITIVE. Was: " + letterString);
     }
 }

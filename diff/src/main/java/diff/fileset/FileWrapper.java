@@ -10,6 +10,7 @@ class FileWrapper {
     private final FileWrapperBehaviour fileWrapperBehaviour;
     private final File file;
     private final String relativePathName;
+    private Long cachedFileLength;
 
     public FileWrapper(FileWrapperBehaviour fileWrapperBehaviour, File file) {
         this.file = file;
@@ -42,5 +43,12 @@ class FileWrapper {
 
     public String getRelativePathName() {
         return relativePathName;
+    }
+
+    public long getFileSize() {
+        if (cachedFileLength == null) {
+            cachedFileLength = file.length();
+        }
+        return cachedFileLength;
     }
 }

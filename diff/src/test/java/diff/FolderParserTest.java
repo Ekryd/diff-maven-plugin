@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
 public class FolderParserTest {
     @Test
     public void removedFilesShouldBeOldFilesMinusNewFiles() throws Exception {
-        FolderParser folderParser = new FolderParser();
+        FolderParser folderParser = new FolderParser(null);
         ReflectionHelper helper = new ReflectionHelper(folderParser);
         helper.setField("oldFiles", new FileSet(Letters.CASE_SENSITIVE, new File("folder").getAbsolutePath()).setFiles(Arrays.asList(
                 new File("A.txt"), new File("B.txt"))));
@@ -59,7 +59,7 @@ public class FolderParserTest {
                 .setFolders("src/test/resources/old", "src/test/resources/new")
                 .createPluginParameters();
 
-        FolderParser folderParser = new FolderParser();
+        FolderParser folderParser = new FolderParser(null);
         folderParser.setup(parameters);
         new ReflectionHelper(folderParser).setField(fileUtil);
 

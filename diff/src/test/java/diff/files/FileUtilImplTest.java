@@ -33,16 +33,21 @@ public class FileUtilImplTest {
     
     @Test
     public void ignoredFoldersCaseInsensitiveShouldNotShow() throws Exception {
-        PluginParameters parameters = new PluginParametersBuilder().setExcludeRelativeFolders("new/ignore2", "old/IGNORE").createPluginParameters();
+        PluginParameters parameters = new PluginParametersBuilder()
+                .setExcludeRelativeFolders("new/ignore2", "old/IGNORE")
+                .createPluginParameters();
         FileUtilImpl fileUtil = new FileUtilImpl();
 
         FolderFilter folderFilter = new FolderFilter(parameters, "src/test/resources");
         Collection<File> files = fileUtil.getFiles("src/test/resources", folderFilter);
 
-        assertThat(files, not(hasItem(withAbsolutePath(
-                fileNameEndsWith("src/test/resources/new/ignore2/ignore2.txt")))));
-        assertThat(files, not(hasItem(withAbsolutePath(
-                fileNameEndsWith("src/test/resources/old/ignore/ignored.txt")))));
+        Matcher<Iterable<? super File>> filesMatch1 = hasItem(withAbsolutePath(
+                fileNameEndsWith("src/test/resources/new/ignore2/ignore2.txt")));
+        assertThat(files, not(filesMatch1));
+
+        Matcher<Iterable<? super File>> filesMatch2 = hasItem(withAbsolutePath(
+                fileNameEndsWith("src/test/resources/old/ignore/ignored.txt")));
+        assertThat(files, not(filesMatch2));
     }
 
     @Test
@@ -56,9 +61,12 @@ public class FileUtilImplTest {
         FolderFilter folderFilter = new FolderFilter(parameters, "src/test/resources");
         Collection<File> files = fileUtil.getFiles("src/test/resources", folderFilter);
 
-        assertThat(files, not(hasItem(withAbsolutePath(
-                fileNameEndsWith("src/test/resources/new/ignore2/ignore2.txt")))));
-        assertThat(files, hasItem(withAbsolutePath(
-                fileNameEndsWith("src/test/resources/old/ignore/ignored.txt"))));
+        Matcher<Iterable<? super File>> filesMatch1 = hasItem(withAbsolutePath(
+                fileNameEndsWith("src/test/resources/new/ignore2/ignore2.txt")));
+        assertThat(files, not(filesMatch1));
+
+        Matcher<Iterable<? super File>> filesMatch2 = hasItem(withAbsolutePath(
+                fileNameEndsWith("src/test/resources/old/ignore/ignored.txt")));
+        assertThat(files, filesMatch2);
     }
 }
