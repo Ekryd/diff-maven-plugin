@@ -1,5 +1,6 @@
 package diff;
 
+import diff.logger.PluginLogger;
 import diff.parameters.PluginParameters;
 import diff.parameters.PluginParametersBuilder;
 import org.junit.Test;
@@ -8,10 +9,12 @@ import static matcher.FileSlashMatcher.fileNameEndsWith;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 
 
 @SuppressWarnings("unchecked")
 public class TestFilesToRemove {
+    private PluginLogger logger = mock(PluginLogger.class);
 
     @Test
     public void filesToRemoveShouldContainMissingFilesInNewFolder() {
@@ -21,7 +24,7 @@ public class TestFilesToRemove {
                 .setExcludeRelativeFolders("IGNORE", "IGNORE2")
                 .createPluginParameters();
 
-        FolderParser folderParser = new FolderParser(null);
+        FolderParser folderParser = new FolderParser(logger);
         folderParser.setup(parameters);
         folderParser.diff();
 
@@ -38,7 +41,7 @@ public class TestFilesToRemove {
                 .setExcludeRelativeFolders("ignore", "ignore2", "recursive")
                 .createPluginParameters();
 
-        FolderParser folderParser = new FolderParser(null);
+        FolderParser folderParser = new FolderParser(logger);
         folderParser.setup(parameters);
         folderParser.diff();
 
@@ -56,7 +59,7 @@ public class TestFilesToRemove {
                 .setExcludeRelativeFolders("ignore", "ignore2", "FOLDER")
                 .createPluginParameters();
 
-        FolderParser folderParser = new FolderParser(null);
+        FolderParser folderParser = new FolderParser(logger);
         folderParser.setup(parameters);
         folderParser.diff();
 

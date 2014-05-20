@@ -6,11 +6,16 @@ import org.apache.maven.plugin.logging.Log;
  * @author bjorn
  * @since 2012-12-22
  */
-public class MavenLogger implements SortPomLogger {
+public class MavenLogger implements PluginLogger {
     private final Log log;
 
     public MavenLogger(Log log) {
         this.log = log;
+    }
+
+    @Override
+    public void error(String content) {
+        log.error(content);
     }
 
     @Override
@@ -24,7 +29,12 @@ public class MavenLogger implements SortPomLogger {
     }
 
     @Override
-    public void error(String content) {
-        log.error(content);
+    public void debug(String content) {
+        log.debug(content);
+    }
+
+    @Override
+    public boolean isDebug() {
+        return log.isDebugEnabled();
     }
 }

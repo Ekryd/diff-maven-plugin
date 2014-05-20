@@ -4,7 +4,7 @@ import diff.files.FileUtil;
 import diff.files.FileUtilImpl;
 import diff.files.FolderFilter;
 import diff.fileset.FileSet;
-import diff.logger.SortPomLogger;
+import diff.logger.PluginLogger;
 import diff.parameters.CaseSensitivity;
 import diff.parameters.PluginParameters;
 
@@ -17,7 +17,7 @@ import java.util.List;
  * @since 2014-04-25
  */
 class FolderParser {
-    private final SortPomLogger logger;
+    private final PluginLogger logger;
     private PluginParameters parameters;
     private FileUtil fileUtil;
     private String newFolder;
@@ -27,8 +27,9 @@ class FolderParser {
     private FileSet newFiles;
     private CaseSensitivity caseSensitivity;
 
-    public FolderParser(SortPomLogger logger) {
+    public FolderParser(PluginLogger logger) {  
         this.logger = logger;
+        this.fileUtil = new FileUtilImpl(logger);
     }
 
     public void setup(PluginParameters parameters) {
@@ -36,7 +37,6 @@ class FolderParser {
         this.newFolder = parameters.getNewFolder();
         this.oldFolder = parameters.getOldFolder();
         this.caseSensitivity = parameters.getCaseSensitivity();
-        this.fileUtil = new FileUtilImpl();
     }
 
     public void diff() {
