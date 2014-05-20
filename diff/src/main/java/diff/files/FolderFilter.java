@@ -30,13 +30,13 @@ public class FolderFilter extends AbstractFileFilter {
 
     private List<String> getExcludedFolders(PluginParameters parameters, String baseFolder) {
         List<String> returnValue = new ArrayList<String>();
-                
+
         for (String excludeRelativeFolder : parameters.getExcludeRelativeFolders()) {
             String folderWithoutSlashesBeforeOrAfter = REGEX_MATCHING_TRIMMING_ANY_SLASHES.matcher(excludeRelativeFolder).replaceAll("$1");
 
             returnValue.add(new File(baseFolder, folderWithoutSlashesBeforeOrAfter).getAbsolutePath());
         }
-        
+
         return returnValue;
     }
 
@@ -57,7 +57,7 @@ public class FolderFilter extends AbstractFileFilter {
         if (file.isDirectory()) {
             return acceptDirectory(absolutePath);
         }
-        
+
         return true;
     }
 

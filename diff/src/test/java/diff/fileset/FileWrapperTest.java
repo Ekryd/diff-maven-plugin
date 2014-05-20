@@ -22,7 +22,7 @@ public class FileWrapperTest {
         FileWrapper fileWrapper2 = new FileWrapper(fileWrapperBehaviour, new File("A.txt"));
 
         fileWrapperBehaviour.setFileNameEqualizer();
-        
+
         assertThat(fileWrapper1, equalTo(fileWrapper2));
     }
 
@@ -33,7 +33,7 @@ public class FileWrapperTest {
         FileWrapper fileWrapper2 = new FileWrapper(fileWrapperBehaviour, new File("B.txt"));
 
         fileWrapperBehaviour.setFileNameEqualizer();
-        
+
         assertThat(fileWrapper1, not(equalTo(fileWrapper2)));
     }
 
@@ -44,7 +44,7 @@ public class FileWrapperTest {
         FileWrapper fileWrapper2 = new FileWrapper(fileWrapperBehaviour, new File("a.txt"));
 
         fileWrapperBehaviour.setFileNameEqualizer();
-        
+
         assertThat(fileWrapper1, equalTo(fileWrapper2));
     }
 
@@ -55,7 +55,7 @@ public class FileWrapperTest {
         FileWrapper fileWrapper2 = new FileWrapper(fileWrapperBehaviour, new File("A.txt"));
 
         fileWrapperBehaviour.setFileNameEqualizer();
-        
+
         assertThat(fileWrapper1, equalTo(fileWrapper2));
     }
 
@@ -66,7 +66,7 @@ public class FileWrapperTest {
         FileWrapper fileWrapper2 = new FileWrapper(fileWrapperBehaviour, new File("B.txt"));
 
         fileWrapperBehaviour.setFileNameEqualizer();
-        
+
         assertThat(fileWrapper1, not(equalTo(fileWrapper2)));
     }
 
@@ -77,7 +77,7 @@ public class FileWrapperTest {
         FileWrapper fileWrapper2 = new FileWrapper(fileWrapperBehaviour, new File("a.txt"));
 
         fileWrapperBehaviour.setFileNameEqualizer();
-        
+
         assertThat(fileWrapper1, not(equalTo(fileWrapper2)));
     }
 
@@ -89,7 +89,7 @@ public class FileWrapperTest {
         FileWrapper fileWrapper2 = new FileWrapper(fileWrapperBehaviour2, new File("new/A.txt"));
 
         fileWrapperBehaviour1.setFileNameEqualizer();
-        
+
         assertThat(fileWrapper1, equalTo(fileWrapper2));
     }
 }

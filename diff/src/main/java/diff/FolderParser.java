@@ -27,7 +27,7 @@ class FolderParser {
     private FileSet newFiles;
     private CaseSensitivity caseSensitivity;
 
-    public FolderParser(PluginLogger logger) {  
+    public FolderParser(PluginLogger logger) {
         this.logger = logger;
         this.fileUtil = new FileUtilImpl(logger);
     }
@@ -56,17 +56,17 @@ class FolderParser {
         if (oldFiles.size() == 0 && newFiles.size() == 0) {
             logger.warn("Both old folder and new folder was empty");
         } else {
-            logger.info(String.format("Comparing %d old files with %d new files", 
+            logger.info(String.format("Comparing %d old files with %d new files",
                     oldFiles.size(), newFiles.size()));
         }
     }
 
     private FileSet createFileSetFromFolder(String relativeBaseFolder) {
         String absoluteBaseFolder = fileUtil.getAbsoluteFileName(relativeBaseFolder);
-               
+
         FolderFilter folderFilter = new FolderFilter(logger, parameters, absoluteBaseFolder);
         FileSet fileSet = new FileSet(caseSensitivity, absoluteBaseFolder);
-        
+
         Collection<File> files = fileUtil.getFiles(relativeBaseFolder, folderFilter);
         fileSet.setFiles(files);
 

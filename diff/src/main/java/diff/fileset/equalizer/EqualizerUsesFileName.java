@@ -25,6 +25,6 @@ class EqualizerUsesFileName implements Equalizer {
             return current.getRelativePathName().equals(other.getRelativePathName());
         }
 
-        return current.getRelativePathName().equalsIgnoreCase(other.getRelativePathName());        
+        return current.getRelativePathName().equalsIgnoreCase(other.getRelativePathName());
     }
 }

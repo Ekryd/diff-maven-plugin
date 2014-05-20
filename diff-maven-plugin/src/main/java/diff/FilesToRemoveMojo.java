@@ -59,7 +59,7 @@ class FilesToRemoveMojo extends AbstractMojo {
 
     void setup() throws MojoFailureException {
         try {
-            
+
             PluginParameters pluginParameters = new PluginParametersBuilder()
                     .setFolders(oldFolder, newFolder)
                     .setCaseSensitivity(caseSensitivity)
@@ -69,7 +69,7 @@ class FilesToRemoveMojo extends AbstractMojo {
 
             folderParser = new FolderParser(new MavenLogger(getLog()));
             folderParser.setup(pluginParameters);
-            
+
         } catch (FailureException e) {
             new ExceptionHandler(e).throwMojoFailureException();
         }
@@ -78,8 +78,8 @@ class FilesToRemoveMojo extends AbstractMojo {
     void showFilesToRemove() throws MojoFailureException {
         try {
 
-        folderParser.diff();
-        folderParser.outputFilesToRemove();
+            folderParser.diff();
+            folderParser.outputFilesToRemove();
 
         } catch (FailureException e) {
             new ExceptionHandler(e).throwMojoFailureException();

@@ -71,7 +71,7 @@ public class FileSet {
 
     public FileSet retainChangedFiles(FileSet newFileSet) {
         Collection<FileWrapperPair> filesWithSameName = retainSameFileName(newFileSet);
-        
+
         Collection<FileWrapper> filesThatHaveDiffSize = retainAllThatDifferBySize(filesWithSameName);
 
         return createNewFileSet(filesThatHaveDiffSize);

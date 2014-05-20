@@ -9,7 +9,7 @@ import org.junit.Ignore;
  */
 @Ignore
 public class FilesToRemoveMojoTest extends TestCase {
-   
+
 //    @Test
 //    public void defaultValueForLetterHandlingShouldBeCASE_INSENSITIVE() {
 //        MavenPluginHarness harness = new MavenPluginHarness(FilesToRemoveMojo.class);

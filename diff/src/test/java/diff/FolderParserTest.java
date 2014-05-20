@@ -19,9 +19,7 @@ import static org.hamcrest.Matchers.endsWith;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * @author bjorn
@@ -71,18 +69,18 @@ public class FolderParserTest {
 
         assertThat(folderParser.getFilesToRemove(), contains(fileNameEndsWith("folder/A.txt")));
     }
-    
+
     @Test
     public void pluginParametersShouldBeWrittenToDebugLog() {
         when(logger.isDebug()).thenReturn(true);
-        
-       PluginParameters parameters = new PluginParametersBuilder()
+
+        PluginParameters parameters = new PluginParametersBuilder()
                 .setFolders("src/test/resources/old", "src/test/resources/new")
                 .createPluginParameters();
-        
+
         FolderParser folderParser = new FolderParser(logger);
         folderParser.setup(parameters);
-        
-        verify(logger).debug("PluginParameters{oldFolder='src/test/resources/old', newFolder='src/test/resources/new', caseSensitivity=CASE_INSENSITIVE, excludeRelativeFolders=[], filesToRemoveOutputFile=null}");        
+
+        verify(logger).debug("PluginParameters{oldFolder='src/test/resources/old', newFolder='src/test/resources/new', caseSensitivity=CASE_INSENSITIVE, excludeRelativeFolders=[], filesToRemoveOutputFile=null}");
     }
 }
