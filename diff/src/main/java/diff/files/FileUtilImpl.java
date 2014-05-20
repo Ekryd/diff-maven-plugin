@@ -1,5 +1,6 @@
 package diff.files;
 
+import diff.exception.FailureException;
 import diff.logger.PluginLogger;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.CanReadFileFilter;
@@ -28,7 +29,7 @@ public class FileUtilImpl implements FileUtil {
             }
             return files;
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Could not list files in '" + folderName + "'", e);
+            throw new FailureException("Could not list files in '" + folderName + "'", e);
         }
     }
 

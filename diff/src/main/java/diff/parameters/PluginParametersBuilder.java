@@ -3,8 +3,6 @@ package diff.parameters;
 import java.io.File;
 
 public class PluginParametersBuilder {
-
-
     private String oldFolder;
     private String newFolder;
     private CaseSensitivity caseSensitivity = CaseSensitivity.CASE_INSENSITIVE;

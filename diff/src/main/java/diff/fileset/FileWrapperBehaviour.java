@@ -1,5 +1,7 @@
 package diff.fileset;
 
+import diff.fileset.equalizer.Equalizer;
+import diff.fileset.equalizer.EqualizerFactory;
 import diff.parameters.CaseSensitivity;
 
 /**
@@ -10,11 +12,12 @@ class FileWrapperBehaviour {
 
     private final CaseSensitivity caseSensitivity;
     private final String scanBaseFolderPathName;
-    private Equalizer equalizer = new EqualizerGeneratesException();
+    private Equalizer equalizer;
 
     public FileWrapperBehaviour(CaseSensitivity caseSensitivity, String scanBaseFolderPathName) {
         this.caseSensitivity = caseSensitivity;
         this.scanBaseFolderPathName = scanBaseFolderPathName;
+        setDefaultEqualizer();
     }
 
     public CaseSensitivity getCaseSensitivity() {
@@ -30,14 +33,14 @@ class FileWrapperBehaviour {
     }
 
     public void setFileNameEqualizer() {
-        equalizer = new EqualizerUsesFileName(caseSensitivity);
+        equalizer = new EqualizerFactory().createEqualizerUsesFileName(caseSensitivity);
     }
 
     public void setDefaultEqualizer() {
-        equalizer = new EqualizerGeneratesException();
+        equalizer = new EqualizerFactory().createEqualizerGeneratesException();
     }
 
     public void setFileSizeEqualizer() {
-        equalizer = new EqualizerUsesFileSize();
+        equalizer = new EqualizerFactory().createEqualizerUsesFileSize();
     }
 }

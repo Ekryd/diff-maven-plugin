@@ -6,13 +6,6 @@ package diff.logger;
  */
 public interface PluginLogger {
     /**
-     * Send a message to the log in the <b>error</b> level.
-     *
-     * @param content error message
-     */
-    void error(String content);
-
-    /**
      * Send a message to the log in the <b>warn</b> level.
      *
      * @param content warning message

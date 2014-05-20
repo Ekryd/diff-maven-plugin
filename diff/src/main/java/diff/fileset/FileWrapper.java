@@ -1,12 +1,14 @@
 package diff.fileset;
 
+import diff.fileset.equalizer.FileMethods;
+
 import java.io.File;
 
 /**
  * @author bjorn
  * @since 2014-04-29
  */
-class FileWrapper {
+class FileWrapper implements FileMethods {
     private final FileWrapperBehaviour fileWrapperBehaviour;
     private final File file;
     private final String relativePathName;
@@ -41,10 +43,12 @@ class FileWrapper {
         return file.getAbsolutePath();
     }
 
+    @Override
     public String getRelativePathName() {
         return relativePathName;
     }
 
+    @Override
     public long getFileSize() {
         if (cachedFileLength == null) {
             cachedFileLength = file.length();

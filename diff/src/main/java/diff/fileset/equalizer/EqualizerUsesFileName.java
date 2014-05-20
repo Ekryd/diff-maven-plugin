@@ -1,4 +1,4 @@
-package diff.fileset;
+package diff.fileset.equalizer;
 
 import diff.parameters.CaseSensitivity;
 
@@ -16,7 +16,7 @@ class EqualizerUsesFileName implements Equalizer {
     }
 
     @Override
-    public boolean equalTo(FileWrapper current, FileWrapper other) {
+    public boolean equalTo(FileMethods current, FileMethods other) {
         if (current == other) {
             return true;
         }

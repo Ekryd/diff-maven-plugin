@@ -33,21 +33,38 @@ class FolderParser {
     }
 
     public void setup(PluginParameters parameters) {
+        writeParametersToDebugLog(parameters);
         this.parameters = parameters;
         this.newFolder = parameters.getNewFolder();
         this.oldFolder = parameters.getOldFolder();
         this.caseSensitivity = parameters.getCaseSensitivity();
     }
 
+    private void writeParametersToDebugLog(PluginParameters parameters) {
+        if (logger.isDebug()) {
+            logger.debug(parameters.toString());
+        }
+    }
+
     public void diff() {
         oldFiles = createFileSetFromFolder(oldFolder);
         newFiles = createFileSetFromFolder(newFolder);
+        logProgress();
+    }
+
+    private void logProgress() {
+        if (oldFiles.size() == 0 && newFiles.size() == 0) {
+            logger.warn("Both old folder and new folder was empty");
+        } else {
+            logger.info(String.format("Comparing %d old files with %d new files", 
+                    oldFiles.size(), newFiles.size()));
+        }
     }
 
     private FileSet createFileSetFromFolder(String relativeBaseFolder) {
         String absoluteBaseFolder = fileUtil.getAbsoluteFileName(relativeBaseFolder);
                
-        FolderFilter folderFilter = new FolderFilter(parameters, absoluteBaseFolder);
+        FolderFilter folderFilter = new FolderFilter(logger, parameters, absoluteBaseFolder);
         FileSet fileSet = new FileSet(caseSensitivity, absoluteBaseFolder);
         
         Collection<File> files = fileUtil.getFiles(relativeBaseFolder, folderFilter);

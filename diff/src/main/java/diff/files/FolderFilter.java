@@ -1,6 +1,7 @@
 package diff.files;
 
 import diff.exception.FailureException;
+import diff.logger.PluginLogger;
 import diff.parameters.CaseSensitivity;
 import diff.parameters.PluginParameters;
 import org.apache.commons.io.filefilter.AbstractFileFilter;
@@ -8,6 +9,7 @@ import org.apache.commons.io.filefilter.AbstractFileFilter;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * @author bjorn
@@ -15,18 +17,27 @@ import java.util.List;
  */
 public class FolderFilter extends AbstractFileFilter {
 
-    private static final String REGEX_MATCHING_TRIMMING_ANY_SLASHES = "^[/\\\\]*(.*?)[/\\\\]*$";
-    private final List<String> excludeAbsoluteFolders = new ArrayList<String>();
+    private static final Pattern REGEX_MATCHING_TRIMMING_ANY_SLASHES = Pattern.compile("^[/\\\\]*(.*?)[/\\\\]*$");
+    private final List<String> excludeAbsoluteFolders;
     private final CaseSensitivity caseSensitivity;
+    private final PluginLogger logger;
 
-    public FolderFilter(PluginParameters parameters, String baseFolder) {
-        caseSensitivity = parameters.getCaseSensitivity();
+    public FolderFilter(PluginLogger logger, PluginParameters parameters, String baseFolder) {
+        this.logger = logger;
+        this.caseSensitivity = parameters.getCaseSensitivity();
+        this.excludeAbsoluteFolders = getExcludedFolders(parameters, baseFolder);
+    }
 
+    private List<String> getExcludedFolders(PluginParameters parameters, String baseFolder) {
+        List<String> returnValue = new ArrayList<String>();
+                
         for (String excludeRelativeFolder : parameters.getExcludeRelativeFolders()) {
-            String folderWithoutSlashesBeforeOrAfter = excludeRelativeFolder.replaceAll(REGEX_MATCHING_TRIMMING_ANY_SLASHES, "$1");
+            String folderWithoutSlashesBeforeOrAfter = REGEX_MATCHING_TRIMMING_ANY_SLASHES.matcher(excludeRelativeFolder).replaceAll("$1");
 
-            excludeAbsoluteFolders.add(new File(baseFolder, folderWithoutSlashesBeforeOrAfter).getAbsolutePath());
+            returnValue.add(new File(baseFolder, folderWithoutSlashesBeforeOrAfter).getAbsolutePath());
         }
+        
+        return returnValue;
     }
 
     /**
@@ -43,8 +54,19 @@ public class FolderFilter extends AbstractFileFilter {
             throw new FailureException("Cannot read folder " + absolutePath);
         }
 
+        if (file.isDirectory()) {
+            return acceptDirectory(absolutePath);
+        }
+        
+        return true;
+    }
+
+    private boolean acceptDirectory(String absolutePath) {
         for (String excludeAbsoluteFolder : excludeAbsoluteFolders) {
             if (isExcluded(absolutePath, excludeAbsoluteFolder)) {
+                if (logger.isDebug()) {
+                    logger.debug("Excluding folder " + absolutePath);
+                }
                 return false;
             }
         }

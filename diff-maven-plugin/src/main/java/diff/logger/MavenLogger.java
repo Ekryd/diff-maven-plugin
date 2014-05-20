@@ -14,11 +14,6 @@ public class MavenLogger implements PluginLogger {
     }
 
     @Override
-    public void error(String content) {
-        log.error(content);
-    }
-
-    @Override
     public void warn(String content) {
         log.warn(content);
     }

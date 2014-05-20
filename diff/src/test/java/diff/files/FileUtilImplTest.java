@@ -21,8 +21,8 @@ import static org.mockito.Mockito.*;
  * @since 2014-04-25
  */
 public class FileUtilImplTest {
-    PluginLogger logger = mock(PluginLogger.class);
-    
+    private PluginLogger logger = mock(PluginLogger.class);
+
     @Test
     public void getFilesShouldReturnAllFilesRecursively() throws Exception {
         FileUtilImpl fileUtil = new FileUtilImpl(logger);
@@ -34,7 +34,7 @@ public class FileUtilImplTest {
         };
         assertThat(files, containsInAnyOrder(expectedFiles));
     }
-    
+
     @Test
     public void ignoredFoldersCaseInsensitiveShouldNotShow() throws Exception {
         PluginParameters parameters = new PluginParametersBuilder()
@@ -42,7 +42,7 @@ public class FileUtilImplTest {
                 .createPluginParameters();
         FileUtilImpl fileUtil = new FileUtilImpl(logger);
 
-        FolderFilter folderFilter = new FolderFilter(parameters, "src/test/resources");
+        FolderFilter folderFilter = new FolderFilter(logger, parameters, "src/test/resources");
         Collection<File> files = fileUtil.getFiles("src/test/resources", folderFilter);
 
         Matcher<Iterable<? super File>> filesMatch1 = hasItem(withAbsolutePath(
@@ -62,7 +62,7 @@ public class FileUtilImplTest {
                 .createPluginParameters();
         FileUtilImpl fileUtil = new FileUtilImpl(logger);
 
-        FolderFilter folderFilter = new FolderFilter(parameters, "src/test/resources");
+        FolderFilter folderFilter = new FolderFilter(logger, parameters, "src/test/resources");
         Collection<File> files = fileUtil.getFiles("src/test/resources", folderFilter);
 
         Matcher<Iterable<? super File>> filesMatch1 = hasItem(withAbsolutePath(
@@ -73,16 +73,16 @@ public class FileUtilImplTest {
                 fileNameEndsWith("src/test/resources/old/ignore/ignored.txt")));
         assertThat(files, filesMatch2);
     }
-    
- 
-       @Test
+
+
+    @Test
     public void getFilesShouldWriteDebugLogEntry() throws Exception {
-           when(logger.isDebug()).thenReturn(true);
+        when(logger.isDebug()).thenReturn(true);
         FileUtilImpl fileUtil = new FileUtilImpl(logger);
         Collection<File> files = fileUtil.getFiles("src/test/resources/new/recursive", CanReadFileFilter.CAN_READ);
 
-           verify(logger).debug("Found files: [src/test/resources/new/recursive/inception.txt, src/test/resources/new/recursive/recursive/inception.txt]");
+        verify(logger).debug("Found files: [src/test/resources/new/recursive/inception.txt, src/test/resources/new/recursive/recursive/inception.txt]");
     }
-    
+
 
 }

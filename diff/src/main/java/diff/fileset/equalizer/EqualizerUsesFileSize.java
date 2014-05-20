@@ -1,4 +1,4 @@
-package diff.fileset;
+package diff.fileset.equalizer;
 
 /**
  * @author bjorn
@@ -6,7 +6,7 @@ package diff.fileset;
  */
 class EqualizerUsesFileSize implements Equalizer {
     @Override
-    public boolean equalTo(FileWrapper current, FileWrapper other) {
+    public boolean equalTo(FileMethods current, FileMethods other) {
         if (current == other) {
             return true;
         }
