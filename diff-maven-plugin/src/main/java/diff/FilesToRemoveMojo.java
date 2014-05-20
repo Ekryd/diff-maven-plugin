@@ -32,8 +32,8 @@ public class FilesToRemoveMojo extends AbstractMojo {
     private String newFolder;
 
     /** If folder and file comparison should be case sensitive or not */
-    @Parameter(property = "diff.letters", defaultValue = "CASE_INSENSITIVE")
-    private String letters;
+    @Parameter(property = "diff.caseSensitivity", defaultValue = "CASE_INSENSITIVE")
+    private String caseSensitivity;
 
     /** Exclude the following folders (and subfolders) from the comparison */
     @Parameter(property = "diff.excludeRelativeFolders")
@@ -62,7 +62,7 @@ public class FilesToRemoveMojo extends AbstractMojo {
             
             PluginParameters pluginParameters = new PluginParametersBuilder()
                     .setFolders(oldFolder, newFolder)
-                    .setLetterHandling(letters)
+                    .setCaseSensitivity(caseSensitivity)
                     .setExcludeRelativeFolders(excludeRelativeFolders)
                     .setFilesToRemoveOutputFile(filesToRemoveOutputFile)
                     .createPluginParameters();

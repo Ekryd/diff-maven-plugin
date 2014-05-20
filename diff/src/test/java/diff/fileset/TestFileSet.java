@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static diff.parameters.Letters.CASE_INSENSITIVE;
-import static diff.parameters.Letters.CASE_SENSITIVE;
+import static diff.parameters.CaseSensitivity.CASE_INSENSITIVE;
+import static diff.parameters.CaseSensitivity.CASE_SENSITIVE;
 import static matcher.FileSlashMatcher.fileNameEndsWith;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;

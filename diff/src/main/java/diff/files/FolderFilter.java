@@ -1,7 +1,7 @@
 package diff.files;
 
 import diff.exception.FailureException;
-import diff.parameters.Letters;
+import diff.parameters.CaseSensitivity;
 import diff.parameters.PluginParameters;
 import org.apache.commons.io.filefilter.AbstractFileFilter;
 
@@ -17,10 +17,10 @@ public class FolderFilter extends AbstractFileFilter {
 
     private static final String REGEX_MATCHING_TRIMMING_ANY_SLASHES = "^[/\\\\]*(.*?)[/\\\\]*$";
     private final List<String> excludeAbsoluteFolders = new ArrayList<String>();
-    private final Letters letters;
+    private final CaseSensitivity caseSensitivity;
 
     public FolderFilter(PluginParameters parameters, String baseFolder) {
-        letters = parameters.getLetters();
+        caseSensitivity = parameters.getCaseSensitivity();
 
         for (String excludeRelativeFolder : parameters.getExcludeRelativeFolders()) {
             String folderWithoutSlashesBeforeOrAfter = excludeRelativeFolder.replaceAll(REGEX_MATCHING_TRIMMING_ANY_SLASHES, "$1");
@@ -54,10 +54,10 @@ public class FolderFilter extends AbstractFileFilter {
 
     @SuppressWarnings("RedundantIfStatement")
     private boolean isExcluded(String absolutePath, String excludeAbsoluteFolder) {
-        if (letters == Letters.CASE_INSENSITIVE && excludeAbsoluteFolder.equalsIgnoreCase(absolutePath)) {
+        if (caseSensitivity == CaseSensitivity.CASE_INSENSITIVE && excludeAbsoluteFolder.equalsIgnoreCase(absolutePath)) {
             return true;
         }
-        if (letters == Letters.CASE_SENSITIVE && excludeAbsoluteFolder.equals(absolutePath)) {
+        if (caseSensitivity == CaseSensitivity.CASE_SENSITIVE && excludeAbsoluteFolder.equals(absolutePath)) {
             return true;
         }
         return false;

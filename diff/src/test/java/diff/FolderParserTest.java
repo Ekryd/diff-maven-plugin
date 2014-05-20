@@ -2,7 +2,7 @@ package diff;
 
 import diff.files.FileUtil;
 import diff.fileset.FileSet;
-import diff.parameters.Letters;
+import diff.parameters.CaseSensitivity;
 import diff.parameters.PluginParameters;
 import diff.parameters.PluginParametersBuilder;
 import org.apache.commons.io.filefilter.IOFileFilter;
@@ -30,9 +30,9 @@ public class FolderParserTest {
     public void removedFilesShouldBeOldFilesMinusNewFiles() throws Exception {
         FolderParser folderParser = new FolderParser(null);
         ReflectionHelper helper = new ReflectionHelper(folderParser);
-        helper.setField("oldFiles", new FileSet(Letters.CASE_SENSITIVE, new File("folder").getAbsolutePath()).setFiles(Arrays.asList(
+        helper.setField("oldFiles", new FileSet(CaseSensitivity.CASE_SENSITIVE, new File("folder").getAbsolutePath()).setFiles(Arrays.asList(
                 new File("A.txt"), new File("B.txt"))));
-        helper.setField("newFiles", new FileSet(Letters.CASE_SENSITIVE, new File("folder").getAbsolutePath()).setFiles(Arrays.asList(
+        helper.setField("newFiles", new FileSet(CaseSensitivity.CASE_SENSITIVE, new File("folder").getAbsolutePath()).setFiles(Arrays.asList(
                 new File("B.txt"), new File("C.txt"))));
 
         assertThat(folderParser.getFilesToRemove(), contains(endsWith("A.txt")));

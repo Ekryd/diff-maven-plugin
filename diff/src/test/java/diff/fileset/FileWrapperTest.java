@@ -4,8 +4,8 @@ import org.junit.Test;
 
 import java.io.File;
 
-import static diff.parameters.Letters.CASE_INSENSITIVE;
-import static diff.parameters.Letters.CASE_SENSITIVE;
+import static diff.parameters.CaseSensitivity.CASE_INSENSITIVE;
+import static diff.parameters.CaseSensitivity.CASE_SENSITIVE;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;

@@ -7,12 +7,12 @@ public class PluginParametersBuilder {
 
     private String oldFolder;
     private String newFolder;
-    private Letters letters = Letters.CASE_INSENSITIVE;
+    private CaseSensitivity caseSensitivity = CaseSensitivity.CASE_INSENSITIVE;
     private String[] excludeRelativeFolders = new String[0];
     private File filesToRemoveOutputFile;
 
     public PluginParameters createPluginParameters() {
-        return new PluginParameters(oldFolder, newFolder, letters, excludeRelativeFolders, filesToRemoveOutputFile);
+        return new PluginParameters(oldFolder, newFolder, caseSensitivity, excludeRelativeFolders, filesToRemoveOutputFile);
     }
 
     public PluginParametersBuilder setFolders(String oldFolder, String newFolder) {
@@ -21,8 +21,8 @@ public class PluginParametersBuilder {
         return this;
     }
 
-    public PluginParametersBuilder setLetterHandling(String letters) {
-        this.letters = Letters.fromString(letters);
+    public PluginParametersBuilder setCaseSensitivity(String caseSensitivity) {
+        this.caseSensitivity = CaseSensitivity.fromString(caseSensitivity);
         return this;
     }
 

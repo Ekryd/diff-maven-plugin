@@ -1,6 +1,6 @@
 package diff.fileset;
 
-import diff.parameters.Letters;
+import diff.parameters.CaseSensitivity;
 
 /**
  * @author bjorn
@@ -8,17 +8,17 @@ import diff.parameters.Letters;
  */
 class FileWrapperBehaviour {
 
-    private final Letters letters;
+    private final CaseSensitivity caseSensitivity;
     private final String scanBaseFolderPathName;
     private Equalizer equalizer = new EqualizerGeneratesException();
 
-    public FileWrapperBehaviour(Letters letters, String scanBaseFolderPathName) {
-        this.letters = letters;
+    public FileWrapperBehaviour(CaseSensitivity caseSensitivity, String scanBaseFolderPathName) {
+        this.caseSensitivity = caseSensitivity;
         this.scanBaseFolderPathName = scanBaseFolderPathName;
     }
 
-    public Letters getLetters() {
-        return letters;
+    public CaseSensitivity getCaseSensitivity() {
+        return caseSensitivity;
     }
 
     public String getScanBaseFolderPathName() {
@@ -30,7 +30,7 @@ class FileWrapperBehaviour {
     }
 
     public void setFileNameEqualizer() {
-        equalizer = new EqualizerUsesFileName(letters);
+        equalizer = new EqualizerUsesFileName(caseSensitivity);
     }
 
     public void setDefaultEqualizer() {

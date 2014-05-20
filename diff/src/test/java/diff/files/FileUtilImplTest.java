@@ -54,7 +54,7 @@ public class FileUtilImplTest {
     public void ignoredFoldersCaseSensitiveShouldShow() throws Exception {
         PluginParameters parameters = new PluginParametersBuilder()
                 .setExcludeRelativeFolders("new/ignore2", "old/IGNORE")
-                .setLetterHandling("CASE_SENSITIVE")
+                .setCaseSensitivity("CASE_SENSITIVE")
                 .createPluginParameters();
         FileUtilImpl fileUtil = new FileUtilImpl();
 

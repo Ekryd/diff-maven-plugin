@@ -1,18 +1,18 @@
 package diff.fileset;
 
-import diff.parameters.Letters;
+import diff.parameters.CaseSensitivity;
 
-import static diff.parameters.Letters.CASE_SENSITIVE;
+import static diff.parameters.CaseSensitivity.CASE_SENSITIVE;
 
 /**
  * @author bjorn
  * @since 2014-05-01
  */
 class EqualizerUsesFileName implements Equalizer {
-    private final Letters letters;
+    private final CaseSensitivity caseSensitivity;
 
-    public EqualizerUsesFileName(Letters letters) {
-        this.letters = letters;
+    public EqualizerUsesFileName(CaseSensitivity caseSensitivity) {
+        this.caseSensitivity = caseSensitivity;
     }
 
     @Override
@@ -21,7 +21,7 @@ class EqualizerUsesFileName implements Equalizer {
             return true;
         }
 
-        if (letters == CASE_SENSITIVE) {
+        if (caseSensitivity == CASE_SENSITIVE) {
             return current.getRelativePathName().equals(other.getRelativePathName());
         }
 

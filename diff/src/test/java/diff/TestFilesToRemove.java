@@ -52,7 +52,7 @@ public class TestFilesToRemove {
         // folder is not ignored by "FOLDER"
         PluginParameters parameters = new PluginParametersBuilder()
                 .setFolders("src/test/resources/old", "src/test/resources/new")
-                .setLetterHandling("CASE_SENSITIVE")
+                .setCaseSensitivity("CASE_SENSITIVE")
                 .setExcludeRelativeFolders("ignore", "ignore2", "FOLDER")
                 .createPluginParameters();
 

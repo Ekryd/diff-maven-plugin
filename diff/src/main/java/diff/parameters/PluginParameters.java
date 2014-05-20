@@ -6,14 +6,14 @@ import java.util.Arrays;
 public class PluginParameters {
     private final String oldFolder;
     private final String newFolder;
-    private final Letters letters;
+    private final CaseSensitivity caseSensitivity;
     private final String[] excludeRelativeFolders;
     private final File filesToRemoveOutputFile;
 
-    public PluginParameters(String oldFolder, String newFolder, Letters letters, String[] excludeRelativeFolders, File filesToRemoveOutputFile) {
+    public PluginParameters(String oldFolder, String newFolder, CaseSensitivity caseSensitivity, String[] excludeRelativeFolders, File filesToRemoveOutputFile) {
         this.oldFolder = oldFolder;
         this.newFolder = newFolder;
-        this.letters = letters;
+        this.caseSensitivity = caseSensitivity;
         this.excludeRelativeFolders = excludeRelativeFolders;
         this.filesToRemoveOutputFile = filesToRemoveOutputFile;
     }
@@ -26,8 +26,8 @@ public class PluginParameters {
         return newFolder;
     }
 
-    public Letters getLetters() {
-        return letters;
+    public CaseSensitivity getCaseSensitivity() {
+        return caseSensitivity;
     }
 
     public String[] getExcludeRelativeFolders() {
@@ -39,7 +39,7 @@ public class PluginParameters {
         return "PluginParameters{" +
                 "oldFolder='" + oldFolder + '\'' +
                 ", newFolder='" + newFolder + '\'' +
-                ", letters=" + letters +
+                ", caseSensitivity=" + caseSensitivity +
                 ", excludeRelativeFolders=" + Arrays.toString(excludeRelativeFolders) +
                 ", filesToRemoveOutputFile=" + filesToRemoveOutputFile +
                 '}';

@@ -1,6 +1,6 @@
 package diff.fileset;
 
-import diff.parameters.Letters;
+import diff.parameters.CaseSensitivity;
 
 import java.io.File;
 import java.util.*;
@@ -10,8 +10,8 @@ public class FileSet {
     private final FileWrapperBehaviour fileWrapperBehaviour;
     private Collection<FileWrapper> fileWrappers = Collections.emptyList();
 
-    public FileSet(Letters letters, String absoluteBaseFolder) {
-        this.fileWrapperBehaviour = new FileWrapperBehaviour(letters, absoluteBaseFolder);
+    public FileSet(CaseSensitivity caseSensitivity, String absoluteBaseFolder) {
+        this.fileWrapperBehaviour = new FileWrapperBehaviour(caseSensitivity, absoluteBaseFolder);
     }
 
     public FileSet setFiles(Collection<File> files) {
@@ -46,7 +46,7 @@ public class FileSet {
     }
 
     private FileSet createNewFileSet(Collection<FileWrapper> newFileSet) {
-        FileSet returnValue = new FileSet(fileWrapperBehaviour.getLetters(), fileWrapperBehaviour.getScanBaseFolderPathName());
+        FileSet returnValue = new FileSet(fileWrapperBehaviour.getCaseSensitivity(), fileWrapperBehaviour.getScanBaseFolderPathName());
         returnValue.fileWrappers = newFileSet;
         return returnValue;
     }
