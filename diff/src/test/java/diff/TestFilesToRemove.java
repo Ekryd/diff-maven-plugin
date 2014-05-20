@@ -14,7 +14,7 @@ import static org.mockito.Mockito.mock;
 
 @SuppressWarnings("unchecked")
 public class TestFilesToRemove {
-    private PluginLogger logger = mock(PluginLogger.class);
+    private final PluginLogger logger = mock(PluginLogger.class);
 
     @Test
     public void filesToRemoveShouldContainMissingFilesInNewFolder() {

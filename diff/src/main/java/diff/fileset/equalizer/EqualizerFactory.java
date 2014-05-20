@@ -8,8 +8,8 @@ import diff.parameters.CaseSensitivity;
  */
 public class EqualizerFactory {
 
-    public static final EqualizerGeneratesException EQUALIZER_GENERATES_EXCEPTION = new EqualizerGeneratesException();
-    public static final EqualizerUsesFileSize EQUALIZER_USES_FILE_SIZE = new EqualizerUsesFileSize();
+    private static final EqualizerGeneratesException EQUALIZER_GENERATES_EXCEPTION = new EqualizerGeneratesException();
+    private static final EqualizerUsesFileSize EQUALIZER_USES_FILE_SIZE = new EqualizerUsesFileSize();
 
     public Equalizer createEqualizerUsesFileName(CaseSensitivity caseSensitivity) {
         return new EqualizerUsesFileName(caseSensitivity);

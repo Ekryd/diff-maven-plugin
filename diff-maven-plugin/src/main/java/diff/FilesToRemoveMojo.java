@@ -22,7 +22,7 @@ import java.io.File;
         threadSafe = true,
         defaultPhase = LifecyclePhase.INSTALL,
         requiresProject = false)
-public class FilesToRemoveMojo extends AbstractMojo {
+class FilesToRemoveMojo extends AbstractMojo {
     /** The absolute path to the old folder structure */
     @Parameter(property = "diff.oldFolder", required = true)
     private String oldFolder;
@@ -35,7 +35,7 @@ public class FilesToRemoveMojo extends AbstractMojo {
     @Parameter(property = "diff.caseSensitivity", defaultValue = "CASE_INSENSITIVE")
     private String caseSensitivity;
 
-    /** Exclude the following folders (and subfolders) from the comparison */
+    /** Exclude the following folders (and sub folders) from the comparison */
     @Parameter(property = "diff.excludeRelativeFolders")
     private String[] excludeRelativeFolders;
 

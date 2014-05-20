@@ -40,9 +40,7 @@ public class FileSet {
     public FileSet removeAll(FileSet newFileSet) {
         Collection<FileWrapper> filesThatAreNotInNewFileSet = removeAllThatDifferByName(newFileSet);
 
-        FileSet returnValue = createNewFileSet(filesThatAreNotInNewFileSet);
-
-        return returnValue;
+        return createNewFileSet(filesThatAreNotInNewFileSet);
     }
 
     private FileSet createNewFileSet(Collection<FileWrapper> newFileSet) {
@@ -76,9 +74,7 @@ public class FileSet {
         
         Collection<FileWrapper> filesThatHaveDiffSize = retainAllThatDifferBySize(filesWithSameName);
 
-        FileSet returnValue = createNewFileSet(filesThatHaveDiffSize);
-
-        return returnValue;
+        return createNewFileSet(filesThatHaveDiffSize);
     }
 
     private Collection<FileWrapperPair> retainSameFileName(FileSet newFileSet) {

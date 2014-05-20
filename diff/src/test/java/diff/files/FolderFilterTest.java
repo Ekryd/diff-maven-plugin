@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
 
 @SuppressWarnings("unchecked")
 public class FolderFilterTest {
-    PluginLogger logger = mock(PluginLogger.class);
+    private final PluginLogger logger = mock(PluginLogger.class);
 
     @Test
     public void endingSlashesShouldBeRemovedOnIgnoreFolders() throws NoSuchFieldException, IllegalAccessException {

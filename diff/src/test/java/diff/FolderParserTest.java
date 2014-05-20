@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
  * @since 2014-04-25
  */
 public class FolderParserTest {
-    private PluginLogger logger = mock(PluginLogger.class);
+    private final PluginLogger logger = mock(PluginLogger.class);
 
     @Test
     public void removedFilesShouldBeOldFilesMinusNewFiles() throws Exception {

@@ -21,7 +21,7 @@ import static org.mockito.Mockito.*;
  * @since 2014-04-25
  */
 public class FileUtilImplTest {
-    private PluginLogger logger = mock(PluginLogger.class);
+    private final PluginLogger logger = mock(PluginLogger.class);
 
     @Test
     public void getFilesShouldReturnAllFilesRecursively() throws Exception {
@@ -79,7 +79,7 @@ public class FileUtilImplTest {
     public void getFilesShouldWriteDebugLogEntry() throws Exception {
         when(logger.isDebug()).thenReturn(true);
         FileUtilImpl fileUtil = new FileUtilImpl(logger);
-        Collection<File> files = fileUtil.getFiles("src/test/resources/new/recursive", CanReadFileFilter.CAN_READ);
+        fileUtil.getFiles("src/test/resources/new/recursive", CanReadFileFilter.CAN_READ);
 
         verify(logger).debug("Found files: [src/test/resources/new/recursive/inception.txt, src/test/resources/new/recursive/recursive/inception.txt]");
     }

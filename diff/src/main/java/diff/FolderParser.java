@@ -19,7 +19,7 @@ import java.util.List;
 class FolderParser {
     private final PluginLogger logger;
     private PluginParameters parameters;
-    private FileUtil fileUtil;
+    private final FileUtil fileUtil;
     private String newFolder;
     private String oldFolder;
 
